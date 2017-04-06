@@ -9,19 +9,19 @@ window.onload = function(){
         bear.image = game.assets["images/chara1.png"];
         bear.x = 0;
         bear.y = 0;
-        bear.frame = 5;
+        bear.addEventListener(enchant.Event.TOUCH_START, function(e){
+      		originX = e.x - this.x;
+      		originY = e.y - this.y;
+      	});
+      	bear.addEventListener(enchant.Event.TOUCH_MOVE, function(e){
+      		this.x = e.x - originX;
+      		this.y = e.y - originY;
+      	});
         game.rootScene.addChild(bear);
-
-        bear.addEventListener("enterframe", function(){
-            this.x += 1;
-            this.frame = this.age % 2 + 6;
-        });
-
-        bear.addEventListener("touchstart", function(){
-            game.rootScene.removeChild(bear);
-        });
     };
     game.start();
+
+    msgArea = document.getElementById("msg");
 };
 
 // 1.イベントとコールバックの定義
